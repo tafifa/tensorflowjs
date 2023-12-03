@@ -1,4 +1,4 @@
-const tfjs = require("@tensorflow/tfjs");
+const tfjs = require("@tensorflow/tfjs-node");
 
 function loadModel() {
   const modelUrl = `https://storage.googleapis.com/ml-nodejs/tfjs/model.json`;
@@ -6,8 +6,9 @@ function loadModel() {
 }
 
 function predict(model, imageBuffer) {
-  const tensor = tfjs.decodeImage(imageBuffer)
-    .resizeNearestNeighbor([150, 150])
+  const tensor = tfjs.node
+    .decodeJpeg(imageBuffer)
+    .resizeNearestNeighbor([150,150])
     .expandDims()
     .toFloat();
 
