@@ -2,7 +2,7 @@ import tensorflow as tf
 import numpy as np
 
 def load_model():
-    model_url = tf.keras.utils.get_file('model.json', 'https://storage.googleapis.com/ml-model-artventureid/model.json')
+    model_url = tf.keras.utils.get_file('model.h5', 'https://storage.googleapis.com/ml-model-artventureid/model.h5')
     return tf.keras.models.load_model(model_url)
 
 def predict(model, image_path):
@@ -18,7 +18,7 @@ def predict(model, image_path):
 
 def predict_class(predict_result):
     predicted_class = np.argmax(predict_result)
-    print("Predicted Class:", predicted_class)
+    
     if predicted_class==1:
         print("Bali Following Independence")
     elif predicted_class==2:
@@ -47,8 +47,10 @@ def predict_class(predict_result):
         print("RandomData")
 
 # Example usage
-loaded_model = load_model()
-path = './test/DangHyangNirartha/00001.jpg'
-result = predict(loaded_model, path)
-result_class = predict_class(result)
+if __name__ == "__main__":
+    loaded_model = load_model()
+    path = './ztest/DangHyangNirartha/00001.jpg'
+    result = predict(loaded_model, path)
+    print(result)
+    result_class = predict_class(result)
 
